@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Podes1;
 use App\Models\Podes2;
+use App\Models\Podes3;
+use App\Models\Podes4;
 use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
@@ -19,6 +21,8 @@ class MainController extends Controller
         foreach ($kecamatan as $kec) {
             $podes1 = Podes1::where(['R103' => $kec])->get();
             $podes2 = Podes2::where(['R103' => $kec])->get();
+            $podes3 = Podes3::where(['R103' => $kec])->get();
+            $podes4 = Podes4::where(['R103' => $kec])->get();
 
             $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('template.xlsx');
 
@@ -66,22 +70,22 @@ class MainController extends Controller
             //Tabel T6
             $sheet = $spreadsheet->getSheetByName('T6');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R601DK2);
-                $sheet->setCellValue('F' . $row, $record->R601DK3);
-                $sheet->setCellValue('G' . $row, $record->R601DK2 + $record->R601DK3);
+                $sheet->setCellValue('E' . $row, $record->R701DK2);
+                $sheet->setCellValue('F' . $row, $record->R701DK3);
+                $sheet->setCellValue('G' . $row, $record->R701DK2 + $record->R701DK3);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -107,22 +111,22 @@ class MainController extends Controller
             //Tabel T7
             $sheet = $spreadsheet->getSheetByName('T7');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R601EK2);
-                $sheet->setCellValue('F' . $row, $record->R601EK3);
-                $sheet->setCellValue('G' . $row, $record->R601EK2 + $record->R601EK3);
+                $sheet->setCellValue('E' . $row, $record->R701EK2);
+                $sheet->setCellValue('F' . $row, $record->R701EK3);
+                $sheet->setCellValue('G' . $row, $record->R701EK2 + $record->R701EK3);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -133,7 +137,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -148,22 +152,22 @@ class MainController extends Controller
             //Tabel T8
             $sheet = $spreadsheet->getSheetByName('T8');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R601FK2);
-                $sheet->setCellValue('F' . $row, $record->R601FK3);
-                $sheet->setCellValue('G' . $row, $record->R601FK2 + $record->R601FK3);
+                $sheet->setCellValue('E' . $row, $record->R701FK2);
+                $sheet->setCellValue('F' . $row, $record->R701FK3);
+                $sheet->setCellValue('G' . $row, $record->R701FK2 + $record->R701FK3);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -174,7 +178,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -189,22 +193,22 @@ class MainController extends Controller
             //Tabel T9
             $sheet = $spreadsheet->getSheetByName('T9');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R601GK2);
-                $sheet->setCellValue('F' . $row, $record->R601GK3);
-                $sheet->setCellValue('G' . $row, $record->R601GK2 + $record->R601GK3);
+                $sheet->setCellValue('E' . $row, $record->R701GK2);
+                $sheet->setCellValue('F' . $row, $record->R701GK3);
+                $sheet->setCellValue('G' . $row, $record->R701GK2 + $record->R701GK3);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -215,7 +219,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -230,22 +234,22 @@ class MainController extends Controller
             //Tabel T10
             $sheet = $spreadsheet->getSheetByName('T10');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R601HK2);
-                $sheet->setCellValue('F' . $row, $record->R601HK3);
-                $sheet->setCellValue('G' . $row, $record->R601HK2 + $record->R601HK3);
+                $sheet->setCellValue('E' . $row, $record->R701HK2);
+                $sheet->setCellValue('F' . $row, $record->R701HK3);
+                $sheet->setCellValue('G' . $row, $record->R701HK2 + $record->R701HK3);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -256,7 +260,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -271,22 +275,22 @@ class MainController extends Controller
             //Tabel T11
             $sheet = $spreadsheet->getSheetByName('T11');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R601IK2);
-                $sheet->setCellValue('F' . $row, $record->R601IK3);
-                $sheet->setCellValue('G' . $row, $record->R601IK2 + $record->R601IK3);
+                $sheet->setCellValue('E' . $row, $record->R701IK2);
+                $sheet->setCellValue('F' . $row, $record->R701IK3);
+                $sheet->setCellValue('G' . $row, $record->R701IK2 + $record->R701IK3);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -297,7 +301,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -312,22 +316,22 @@ class MainController extends Controller
             //Tabel T12
             $sheet = $spreadsheet->getSheetByName('T12');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R601JK2);
-                $sheet->setCellValue('F' . $row, $record->R601JK3);
-                $sheet->setCellValue('G' . $row, $record->R601JK2 + $record->R601JK3);
+                $sheet->setCellValue('E' . $row, $record->R701JK2);
+                $sheet->setCellValue('F' . $row, $record->R701JK3);
+                $sheet->setCellValue('G' . $row, $record->R701JK2 + $record->R701JK3);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -338,7 +342,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -353,22 +357,22 @@ class MainController extends Controller
             //Tabel T13
             $sheet = $spreadsheet->getSheetByName('T13');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R601KK2);
-                $sheet->setCellValue('F' . $row, $record->R601KK3);
-                $sheet->setCellValue('G' . $row, $record->R601KK2 + $record->R601KK3);
+                $sheet->setCellValue('E' . $row, $record->R701KK2);
+                $sheet->setCellValue('F' . $row, $record->R701KK3);
+                $sheet->setCellValue('G' . $row, $record->R701KK2 + $record->R601KK3);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -379,7 +383,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -394,31 +398,31 @@ class MainController extends Controller
             //Tabel T14
             $sheet = $spreadsheet->getSheetByName('T14');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 8;
             $row = 6;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R601DK5 . ',Y1:Z5,2,FALSE)');
-                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R601EK5 . ',Y1:Z5,2,FALSE)');
-                $sheet->setCellValue('G' . $row, '=VLOOKUP(' . $record->R601FK5 . ',Y1:Z5,2,FALSE)');
-                $sheet->setCellValue('H' . $row, '=VLOOKUP(' . $record->R601GK5 . ',Y1:Z5,2,FALSE)');
+                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R701DK5 . ',Y1:Z5,2,FALSE)');
+                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R701EK5 . ',Y1:Z5,2,FALSE)');
+                $sheet->setCellValue('G' . $row, '=VLOOKUP(' . $record->R701FK5 . ',Y1:Z5,2,FALSE)');
+                $sheet->setCellValue('H' . $row, '=VLOOKUP(' . $record->R701GK5 . ',Y1:Z5,2,FALSE)');
                 $sheet->setCellValue('I' . $row, $index . '.');
                 $sheet->setCellValue('J' . $row, ucwords(Str::lower($record->R104N)));
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $sheet->mergeCells('J' . $row . ':L' . $row);
-                $sheet->setCellValue('M' . $row, '=VLOOKUP(' . $record->R601HK5 . ',Y1:Z5,2,FALSE)');
-                $sheet->setCellValue('N' . $row, '=VLOOKUP(' . $record->R601IK5 . ',Y1:Z5,2,FALSE)');
-                $sheet->setCellValue('O' . $row, '=VLOOKUP(' . $record->R601JK5 . ',Y1:Z5,2,FALSE)');
-                $sheet->setCellValue('P' . $row, '=VLOOKUP(' . $record->R601KK5 . ',Y1:Z5,2,FALSE)');
+                $sheet->setCellValue('M' . $row, '=VLOOKUP(' . $record->R701HK5 . ',Y1:Z5,2,FALSE)');
+                $sheet->setCellValue('N' . $row, '=VLOOKUP(' . $record->R701IK5 . ',Y1:Z5,2,FALSE)');
+                $sheet->setCellValue('O' . $row, '=VLOOKUP(' . $record->R701JK5 . ',Y1:Z5,2,FALSE)');
+                $sheet->setCellValue('P' . $row, '=VLOOKUP(' . $record->R701KK5 . ',Y1:Z5,2,FALSE)');
                 $index++;
                 $row++;
             }
@@ -431,29 +435,29 @@ class MainController extends Controller
             //Tabel T15
             $sheet = $spreadsheet->getSheetByName('T15');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 9;
             $row = 7;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R603AK2);
-                $sheet->setCellValue('F' . $row, $record->R603BK2);
-                $sheet->setCellValue('G' . $row, $record->R603FK2);
+                $sheet->setCellValue('E' . $row, $record->R704AK2);
+                $sheet->setCellValue('F' . $row, $record->R704BK2);
+                $sheet->setCellValue('G' . $row, $record->R704FK2);
                 $sheet->setCellValue('H' . $row, $index . '.');
                 $sheet->setCellValue('I' . $row, ucwords(Str::lower($record->R104N)));
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $sheet->mergeCells('I' . $row . ':K' . $row);
-                $sheet->setCellValue('L' . $row, $record->R603CK2);
-                $sheet->setCellValue('M' . $row, $record->R603DK2);
-                $sheet->setCellValue('N' . $row, $record->R603LK2);
+                $sheet->setCellValue('L' . $row, $record->R704CK2);
+                $sheet->setCellValue('M' . $row, $record->R704DK2);
+                $sheet->setCellValue('N' . $row, $record->R704LK2);
                 $index++;
                 $row++;
             }
@@ -463,7 +467,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -485,29 +489,29 @@ class MainController extends Controller
             //Tabel T16
             $sheet = $spreadsheet->getSheetByName('T16');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 9;
             $row = 7;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes1 as $record) {
+            foreach ($podes2 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R603AK4 . ',R1:S5,2,FALSE)');
-                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R603BK4 . ',R1:S5,2,FALSE)');
-                $sheet->setCellValue('G' . $row, '=VLOOKUP(' . $record->R603FK4 . ',R1:S5,2,FALSE)');
+                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R704AK4 . ',R1:S5,2,FALSE)');
+                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R704BK4 . ',R1:S5,2,FALSE)');
+                $sheet->setCellValue('G' . $row, '=VLOOKUP(' . $record->R704FK4 . ',R1:S5,2,FALSE)');
                 $sheet->setCellValue('H' . $row, $index . '.');
                 $sheet->setCellValue('I' . $row, ucwords(Str::lower($record->R104N)));
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $sheet->mergeCells('I' . $row . ':K' . $row);
-                $sheet->setCellValue('L' . $row, '=VLOOKUP(' . $record->R603CK4 . ',R1:S5,2,FALSE)');
-                $sheet->setCellValue('M' . $row, '=VLOOKUP(' . $record->R603DK4 . ',R1:S5,2,FALSE)');
-                $sheet->setCellValue('N' . $row, '=VLOOKUP(' . $record->R603LK4 . ',R1:S5,2,FALSE)');
+                $sheet->setCellValue('L' . $row, '=VLOOKUP(' . $record->R704CK4 . ',R1:S5,2,FALSE)');
+                $sheet->setCellValue('M' . $row, '=VLOOKUP(' . $record->R704DK4 . ',R1:S5,2,FALSE)');
+                $sheet->setCellValue('N' . $row, '=VLOOKUP(' . $record->R704LK4 . ',R1:S5,2,FALSE)');
                 $index++;
                 $row++;
             }
@@ -520,33 +524,33 @@ class MainController extends Controller
             //Tabel T18
             $sheet = $spreadsheet->getSheetByName('T18');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 8;
             $row = 6;
-            foreach ($podes2 as $record) {
+            foreach ($podes1 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes2 as $record) {
+            foreach ($podes1 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R1101DK3);
-                $sheet->setCellValue('F' . $row, $record->R1101EK3);
-                $sheet->setCellValue('G' . $row, $record->R1101HK3);
-                $sheet->setCellValue('H' . $row, $record->R1101AK3);
+                $sheet->setCellValue('E' . $row, $record->R601DK3);
+                $sheet->setCellValue('F' . $row, $record->R601EK3);
+                $sheet->setCellValue('G' . $row, $record->R601HK3);
+                $sheet->setCellValue('H' . $row, $record->R601AK3);
                 $sheet->setCellValue('I' . $row, $index . '.');
                 $sheet->setCellValue('J' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('M' . $row, $record->R1101BK3);
-                $sheet->setCellValue('N' . $row, $record->R1101CK3);
-                $sheet->setCellValue('O' . $row, $record->R1101JK3);
+                $sheet->setCellValue('M' . $row, $record->R601BK3);
+                $sheet->setCellValue('N' . $row, $record->R601CK3);
+                $sheet->setCellValue('O' . $row, $record->R601JK3);
                 $sheet->setCellValue('P' . $row, $index . '.');
                 $sheet->setCellValue('Q' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('T' . $row, $record->R1101IK3);
-                $sheet->setCellValue('U' . $row, $record->R1101GK3);
-                $sheet->setCellValue('V' . $row, $record->R1101FK3);
+                $sheet->setCellValue('T' . $row, $record->R601IK3);
+                $sheet->setCellValue('U' . $row, $record->R601GK3);
+                $sheet->setCellValue('V' . $row, $record->R601FK3);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $sheet->mergeCells('J' . $row . ':L' . $row);
                 $sheet->mergeCells('Q' . $row . ':S' . $row);
@@ -559,7 +563,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->setCellValue('I' . $row, $total);
             $sheet->setCellValue('P' . $row, $total);
@@ -590,33 +594,33 @@ class MainController extends Controller
             //Tabel T19
             $sheet = $spreadsheet->getSheetByName('T19');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 8;
             $row = 6;
-            foreach ($podes2 as $record) {
+            foreach ($podes1 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes2 as $record) {
+            foreach ($podes1 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R1101DK4);
-                $sheet->setCellValue('F' . $row, $record->R1101EK4);
-                $sheet->setCellValue('G' . $row, $record->R1101HK4);
-                $sheet->setCellValue('H' . $row, $record->R1101AK4);
+                $sheet->setCellValue('E' . $row, $record->R601DK4);
+                $sheet->setCellValue('F' . $row, $record->R601EK4);
+                $sheet->setCellValue('G' . $row, $record->R601HK4);
+                $sheet->setCellValue('H' . $row, $record->R601AK4);
                 $sheet->setCellValue('I' . $row, $index . '.');
                 $sheet->setCellValue('J' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('M' . $row, $record->R1101BK4);
-                $sheet->setCellValue('N' . $row, $record->R1101CK4);
-                $sheet->setCellValue('O' . $row, $record->R1101JK4);
+                $sheet->setCellValue('M' . $row, $record->R601BK4);
+                $sheet->setCellValue('N' . $row, $record->R601CK4);
+                $sheet->setCellValue('O' . $row, $record->R601JK4);
                 $sheet->setCellValue('P' . $row, $index . '.');
                 $sheet->setCellValue('Q' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('T' . $row, $record->R1101IK4);
-                $sheet->setCellValue('U' . $row, $record->R1101GK4);
-                $sheet->setCellValue('V' . $row, $record->R1101FK4);
+                $sheet->setCellValue('T' . $row, $record->R601IK4);
+                $sheet->setCellValue('U' . $row, $record->R601GK4);
+                $sheet->setCellValue('V' . $row, $record->R601FK4);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $sheet->mergeCells('J' . $row . ':L' . $row);
                 $sheet->mergeCells('Q' . $row . ':S' . $row);
@@ -629,7 +633,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->setCellValue('I' . $row, $total);
             $sheet->setCellValue('P' . $row, $total);
@@ -660,26 +664,26 @@ class MainController extends Controller
             //Tabel T20
             $sheet = $spreadsheet->getSheetByName('T20');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 8;
             $row = 6;
-            foreach ($podes2 as $record) {
+            foreach ($podes1 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes2 as $record) {
+            foreach ($podes1 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R1102A . ',P1:Q2,2,FALSE)');
-                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R1102B . ',T1:U3,2,FALSE)');
-                $sheet->setCellValue('G' . $row, '=VLOOKUP(' . $record->R1102C . ',R1:S2,2,FALSE)');
+                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R604A . ',P1:Q2,2,FALSE)');
+                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R604B . ',T1:U3,2,FALSE)');
+                $sheet->setCellValue('G' . $row, '=VLOOKUP(' . $record->R604C . ',R1:S2,2,FALSE)');
                 $sheet->setCellValue('H' . $row, $index . '.');
                 $sheet->setCellValue('I' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('L' . $row, '=VLOOKUP(' . $record->R1102D . ',V1:W2,2,FALSE)');
-                $sheet->setCellValue('M' . $row, '=VLOOKUP(' . $record->R1102E . ',P1:Q2,2,FALSE)');
+                $sheet->setCellValue('L' . $row, '=VLOOKUP(' . $record->R604D . ',V1:W2,2,FALSE)');
+                $sheet->setCellValue('M' . $row, '=VLOOKUP(' . $record->R604E . ',P1:Q2,2,FALSE)');
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $sheet->mergeCells('I' . $row . ':K' . $row);
                 $index++;
@@ -695,33 +699,33 @@ class MainController extends Controller
             //Tabel T21
             $sheet = $spreadsheet->getSheetByName('T21');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 8;
             $row = 6;
-            foreach ($podes2 as $record) {
+            foreach ($podes3 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes2 as $record) {
+            foreach ($podes3 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R906AK2);
-                $sheet->setCellValue('F' . $row, $record->R906BK2);
-                $sheet->setCellValue('G' . $row, $record->R906CK2);
-                $sheet->setCellValue('H' . $row, $record->R906DK2);
+                $sheet->setCellValue('E' . $row, $record->R1207AK2);
+                $sheet->setCellValue('F' . $row, $record->R1207BK2);
+                $sheet->setCellValue('G' . $row, $record->R1207CK2);
+                $sheet->setCellValue('H' . $row, $record->R1207DK2);
                 $sheet->setCellValue('I' . $row, $index . '.');
                 $sheet->setCellValue('J' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('M' . $row, $record->R906EK2);
-                $sheet->setCellValue('N' . $row, $record->R906JK2);
-                $sheet->setCellValue('O' . $row, $record->R906FK2);
+                $sheet->setCellValue('M' . $row, $record->R1207EK2);
+                $sheet->setCellValue('N' . $row, $record->R1207JK2);
+                $sheet->setCellValue('O' . $row, $record->R1207FK2);
                 $sheet->setCellValue('P' . $row, $index . '.');
                 $sheet->setCellValue('Q' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('T' . $row, $record->R906GK2);
-                $sheet->setCellValue('U' . $row, $record->R906HK2);
-                $sheet->setCellValue('V' . $row, $record->R906IK2);
+                $sheet->setCellValue('T' . $row, $record->R1207GK2);
+                $sheet->setCellValue('U' . $row, $record->R1207HK2);
+                $sheet->setCellValue('V' . $row, $record->R1207IK2);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $sheet->mergeCells('J' . $row . ':L' . $row);
                 $sheet->mergeCells('Q' . $row . ':S' . $row);
@@ -734,7 +738,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->setCellValue('I' . $row, $total);
             $sheet->setCellValue('P' . $row, $total);
@@ -765,22 +769,22 @@ class MainController extends Controller
             //Tabel T22
             $sheet = $spreadsheet->getSheetByName('T22');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes2 as $record) {
+            foreach ($podes3 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes2 as $record) {
+            foreach ($podes3 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R903AK2);
-                $sheet->setCellValue('F' . $row, $record->R903BK2);
-                $sheet->setCellValue('G' . $row, $record->R903CK2);
+                $sheet->setCellValue('E' . $row, $record->R1205A1);
+                $sheet->setCellValue('F' . $row, $record->R1205A2);
+                $sheet->setCellValue('G' . $row, $record->R1205A3);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -791,7 +795,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -806,23 +810,23 @@ class MainController extends Controller
             //Tabel T23
             $sheet = $spreadsheet->getSheetByName('T23');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes2 as $record) {
+            foreach ($podes3 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes2 as $record) {
+            foreach ($podes3 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R904A);
-                $sheet->setCellValue('F' . $row, $record->R904B);
-                $sheet->setCellValue('G' . $row, $record->R904C);
-                $sheet->setCellValue('H' . $row, $record->R904D);
+                $sheet->setCellValue('E' . $row, $record->R1206A1);
+                $sheet->setCellValue('F' . $row, $record->R1206A2);
+                $sheet->setCellValue('G' . $row, $record->R1206A3);
+                $sheet->setCellValue('H' . $row, $record->R1206A4);
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -833,7 +837,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -849,22 +853,22 @@ class MainController extends Controller
             //Tabel T25
             $sheet = $spreadsheet->getSheetByName('T25');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $startrow = 7;
             $row = 5;
-            foreach ($podes2 as $record) {
+            foreach ($podes3 as $record) {
                 $sheet->insertNewRowBefore($startrow);
             }
 
             $index = 1;
-            foreach ($podes2 as $record) {
+            foreach ($podes3 as $record) {
                 $sheet->setCellValue('A' . $row, $index . '.');
                 $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R805A);
-                $sheet->setCellValue('F' . $row, $record->R805B);
-                $sheet->setCellValue('G' . $row, '=VLOOKUP(' . $record->R805C . ',K1:L4,2,FALSE)');
+                $sheet->setCellValue('E' . $row, $record->R1005A);
+                $sheet->setCellValue('F' . $row, $record->R1005B);
+                $sheet->setCellValue('G' . $row, '=VLOOKUP(' . $record->R1005C . ',K1:L4,2,FALSE)');
                 $sheet->mergeCells('B' . $row . ':D' . $row);
                 $index++;
                 $row++;
@@ -875,7 +879,7 @@ class MainController extends Controller
             }
 
             $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $total);
             $sheet->setCellValue('A' . $row, $total);
             $sheet->unmergeCells('B' . $row . ':D' . $row);
             $sheet->mergeCells('A' . $row . ':D' . $row);
@@ -887,190 +891,25 @@ class MainController extends Controller
                 ->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
             //Tabel T25
 
-            //Tabel T27
-            $sheet = $spreadsheet->getSheetByName('T27');
-            $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
-            $sheet->setCellValue('D1', $title);
-
-            $startrow = 7;
-            $row = 5;
-            foreach ($podes2 as $record) {
-                $sheet->insertNewRowBefore($startrow);
-            }
-
-            $index = 1;
-            foreach ($podes2 as $record) {
-                $sheet->setCellValue('A' . $row, $index . '.');
-                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R801A . ',I1:J4,2,FALSE)');
-                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R801C1 . ',L1:M3,2,FALSE)');
-                $sheet->mergeCells('B' . $row . ':D' . $row);
-                $index++;
-                $row++;
-            }
-
-            for ($i = 0; $i < 3; $i++) {
-                $sheet->removeRow($row);
-            }
-
-            //Tabel T27
-
-            //Tabel T28
-            $sheet = $spreadsheet->getSheetByName('T28');
-            $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
-            $sheet->setCellValue('D1', $title);
-
-            $startrow = 7;
-            $row = 5;
-            foreach ($podes2 as $record) {
-                $sheet->insertNewRowBefore($startrow);
-            }
-
-            $index = 1;
-            foreach ($podes2 as $record) {
-                $sheet->setCellValue('A' . $row, $index . '.');
-                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R801B1 . ',H1:I5,2,FALSE)');
-                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R801B2 . ',K1:L4,2,FALSE)');
-                $sheet->mergeCells('B' . $row . ':D' . $row);
-                $index++;
-                $row++;
-            }
-
-            for ($i = 0; $i < 3; $i++) {
-                $sheet->removeRow($row);
-            }
-
-            //Tabel T28
-
-            //Tabel T29
-            $sheet = $spreadsheet->getSheetByName('T29');
-            $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
-            $sheet->setCellValue('D1', $title);
-
-            $startrow = 7;
-            $row = 5;
-            foreach ($podes2 as $record) {
-                $sheet->insertNewRowBefore($startrow);
-            }
-
-            $index = 1;
-            foreach ($podes2 as $record) {
-                $sheet->setCellValue('A' . $row, $index . '.');
-                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R807A . ',H1:I4,2,FALSE)');
-                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R807C . ',H1:I4,2,FALSE)');
-                $sheet->mergeCells('B' . $row . ':D' . $row);
-                $index++;
-                $row++;
-            }
-
-            for ($i = 0; $i < 3; $i++) {
-                $sheet->removeRow($row);
-            }
-
-            //Tabel T29
-
-            //Tabel T17
-            $sheet = $spreadsheet->getSheetByName('T17');
-            $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
-            $sheet->setCellValue('D1', $title);
-
-            $startrow = 7;
-            $row = 5;
-            foreach ($podes1 as $record) {
-                $sheet->insertNewRowBefore($startrow);
-            }
-
-            $index = 1;
-            foreach ($podes1 as $record) {
-                $sheet->setCellValue('A' . $row, $index . '.');
-                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R1207_2019);
-                $sheet->setCellValue('F' . $row, $record->R604);
-                $sheet->mergeCells('B' . $row . ':D' . $row);
-                $index++;
-                $row++;
-            }
-
-            for ($i = 0; $i < 3; $i++) {
-                $sheet->removeRow($row);
-            }
-
-            $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
-            $sheet->setCellValue('A' . $row, $total);
-            $sheet->unmergeCells('B' . $row . ':D' . $row);
-            $sheet->mergeCells('A' . $row . ':D' . $row);
-
-            $sheet->setCellValue('E' . $row, '=SUM(E5:E' . ($row - 1) . ')');
-            $sheet->setCellValue('F' . $row, '=SUM(F5:F' . ($row - 1) . ')');
-            $sheet->getStyle('A' . $row . ':F' . $row)
-                ->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            //Tabel T17
-
-            //Tabel T24
-            $sheet = $spreadsheet->getSheetByName('T24');
-            $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
-            $sheet->setCellValue('D1', $title);
-
-            $startrow = 7;
-            $row = 5;
-            foreach ($podes1 as $record) {
-                $sheet->insertNewRowBefore($startrow);
-            }
-
-            $index = 1;
-            foreach ($podes1 as $record) {
-                $sheet->setCellValue('A' . $row, $index . '.');
-                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-                $sheet->setCellValue('E' . $row, $record->R1202_2019);
-                $sheet->setCellValue('F' . $row, $record->R511);
-                $sheet->mergeCells('B' . $row . ':D' . $row);
-                $index++;
-                $row++;
-            }
-
-            for ($i = 0; $i < 3; $i++) {
-                $sheet->removeRow($row);
-            }
-
-            $total = $sheet->getCell('A' . $row)->getValue();
-            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
-            $sheet->setCellValue('A' . $row, $total);
-            $sheet->unmergeCells('B' . $row . ':D' . $row);
-            $sheet->mergeCells('A' . $row . ':D' . $row);
-
-            $sheet->setCellValue('E' . $row, '=SUM(E5:E' . ($row - 1) . ')');
-            $sheet->setCellValue('F' . $row, '=SUM(F5:F' . ($row - 1) . ')');
-            $sheet->getStyle('A' . $row . ':F' . $row)
-                ->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            //Tabel T24
-
             //Tabel T26
             $sheet = $spreadsheet->getSheetByName('T26');
             $title = $sheet->getCell('D1')->getValue();
-            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
             $arrayOlahraga = array(
-                'Sepak bola' => 'R701AK2',
-                'Bola voli' => 'R701BK2',
-                'Bulu tangkis' => 'R701CK2',
-                'Bola basket' => 'R701DK2',
-                'Tenis lapangan' => 'R701EK2',
-                'Tenis meja' => 'R701FK2',
-                'Futsal' => 'R701GK2',
-                'Renang' => 'R701HK2',
-                'Bela diri (pencak silat, karate, dll)' => 'R701IK2',
-                'Bilyard' => 'R701JK2',
-                'Pusat kebugaran (senam, fitness, aerobik, dll)' => 'R701KK2',
-                'Lainnya' => 'R701LK2',
+                'Sepak bola' => 'R901AK2',
+                'Bola voli' => 'R901BK2',
+                'Bulu tangkis' => 'R901CK2',
+                'Bola basket' => 'R901DK2',
+                'Tenis lapangan' => 'R901EK2',
+                'Tenis meja' => 'R901FK2',
+                'Futsal' => 'R901GK2',
+                'Renang' => 'R901HK2',
+                'Bela diri (pencak silat, karate, dll)' => 'R901IK2',
+                'Bilyard' => 'R901JK2',
+                'Pusat kebugaran (senam, fitness, aerobik, dll)' => 'R901KK2',
+                'Lainnya' => 'R901LK2',
             );
 
             $arrayValue = ['1', '2', '3', '4'];
@@ -1083,7 +922,7 @@ class MainController extends Controller
                 }
             }
 
-            foreach ($podes1 as $record) {
+            foreach ($podes3 as $record) {
                 foreach ($arrayOlahraga as $olahraga => $column) {
                     $map[$olahraga][$record[$column]]++;
                 }
@@ -1099,6 +938,132 @@ class MainController extends Controller
             }
             //Tabel T26
 
+            //Tabel T27
+            $sheet = $spreadsheet->getSheetByName('T27');
+            $title = $sheet->getCell('D1')->getValue();
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $title);
+            $sheet->setCellValue('D1', $title);
+
+            $startrow = 7;
+            $row = 5;
+            foreach ($podes3 as $record) {
+                $sheet->insertNewRowBefore($startrow);
+            }
+
+            $index = 1;
+            foreach ($podes3 as $record) {
+                $sheet->setCellValue('A' . $row, $index . '.');
+                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
+                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R1001A . ',I1:J4,2,FALSE)');
+                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R1001C1 . ',L1:M3,2,FALSE)');
+                $sheet->mergeCells('B' . $row . ':D' . $row);
+                $index++;
+                $row++;
+            }
+
+            for ($i = 0; $i < 3; $i++) {
+                $sheet->removeRow($row);
+            }
+
+            //Tabel T27
+
+            //Tabel T28
+            $sheet = $spreadsheet->getSheetByName('T28');
+            $title = $sheet->getCell('D1')->getValue();
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $title);
+            $sheet->setCellValue('D1', $title);
+
+            $startrow = 7;
+            $row = 5;
+            foreach ($podes3 as $record) {
+                $sheet->insertNewRowBefore($startrow);
+            }
+
+            $index = 1;
+            foreach ($podes3 as $record) {
+                $sheet->setCellValue('A' . $row, $index . '.');
+                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
+                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R1001B1 . ',H1:I5,2,FALSE)');
+                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R1001B2 . ',K1:L4,2,FALSE)');
+                $sheet->mergeCells('B' . $row . ':D' . $row);
+                $index++;
+                $row++;
+            }
+
+            for ($i = 0; $i < 3; $i++) {
+                $sheet->removeRow($row);
+            }
+
+            //Tabel T28
+
+            //Tabel T29
+            $sheet = $spreadsheet->getSheetByName('T29');
+            $title = $sheet->getCell('D1')->getValue();
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $title);
+            $sheet->setCellValue('D1', $title);
+
+            $startrow = 7;
+            $row = 5;
+            foreach ($podes3 as $record) {
+                $sheet->insertNewRowBefore($startrow);
+            }
+
+            $index = 1;
+            foreach ($podes3 as $record) {
+                $sheet->setCellValue('A' . $row, $index . '.');
+                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
+                $sheet->setCellValue('E' . $row, '=VLOOKUP(' . $record->R1007A . ',H1:I4,2,FALSE)');
+                $sheet->setCellValue('F' . $row, '=VLOOKUP(' . $record->R1007C . ',H1:I4,2,FALSE)');
+                $sheet->mergeCells('B' . $row . ':D' . $row);
+                $index++;
+                $row++;
+            }
+
+            for ($i = 0; $i < 3; $i++) {
+                $sheet->removeRow($row);
+            }
+
+            //Tabel T29
+
+            // //Tabel T17
+            // $sheet = $spreadsheet->getSheetByName('T17');
+            // $title = $sheet->getCell('D1')->getValue();
+            // $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            // $sheet->setCellValue('D1', $title);
+
+            // $startrow = 7;
+            // $row = 5;
+            // foreach ($podes1 as $record) {
+            //     $sheet->insertNewRowBefore($startrow);
+            // }
+
+            // $index = 1;
+            // foreach ($podes1 as $record) {
+            //     $sheet->setCellValue('A' . $row, $index . '.');
+            //     $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
+            //     $sheet->setCellValue('E' . $row, $record->R1207_2019);
+            //     $sheet->setCellValue('F' . $row, $record->R604);
+            //     $sheet->mergeCells('B' . $row . ':D' . $row);
+            //     $index++;
+            //     $row++;
+            // }
+
+            // for ($i = 0; $i < 3; $i++) {
+            //     $sheet->removeRow($row);
+            // }
+
+            // $total = $sheet->getCell('A' . $row)->getValue();
+            // $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
+            // $sheet->setCellValue('A' . $row, $total);
+            // $sheet->unmergeCells('B' . $row . ':D' . $row);
+            // $sheet->mergeCells('A' . $row . ':D' . $row);
+
+            // $sheet->setCellValue('E' . $row, '=SUM(E5:E' . ($row - 1) . ')');
+            // $sheet->setCellValue('F' . $row, '=SUM(F5:F' . ($row - 1) . ')');
+            // $sheet->getStyle('A' . $row . ':F' . $row)
+            //     ->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            // //Tabel T17
+
             //Tabel T2
             $sheet = $spreadsheet->getSheetByName('T2');
             $title = $sheet->getCell('D1')->getValue();
@@ -1112,9 +1077,9 @@ class MainController extends Controller
                 '3' => 'Non Listrik',
             );
             $year = array(
-                '2018' => 'R502B_2018',
                 '2019' => 'R402B_2019',
-                '2020' => 'R502B',
+                '2020' => 'R502B_2020',
+                '2021' => 'R502C',
             );
 
             $map = array();
@@ -1163,19 +1128,29 @@ class MainController extends Controller
             $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
             $sheet->setCellValue('D1', $title);
 
+            // $arrayContent = array(
+            //     '1' => 'Gas Kota',
+            //     '2' => 'LPG 3 kg',
+            //     '3' => 'LPG lebih dari 3 kg',
+            //     '4' => 'Minyak tanah',
+            //     '5' => 'Kayu bakar',
+            //     '6' => 'Lainnya',
+            // );
+
             $arrayContent = array(
-                '1' => 'Gas Kota',
-                '2' => 'LPG 3 kg',
-                '3' => 'LPG lebih dari 3 kg',
-                '4' => 'Minyak tanah',
-                '5' => 'Kayu bakar',
-                '6' => 'Lainnya',
+                '5' => 'Gas Kota',
+                '4' => 'LPG 3 kg',
+                '2' => 'LPG 5,5 kg',
+                '3' => 'LPG 12 kg',
+                '7' => 'Minyak tanah',
+                '10' => 'Kayu bakar',
+                '11' => 'Lainnya',
             );
 
             $year = array(
-                '2018' => 'R503B_2018',
-                '2019' => 'R403_2019',
-                '2020' => 'R503B',
+                // '2019' => 'R403_2019',
+                // '2020' => 'R503B_2020',
+                '2021' => 'R503B',
             );
 
             $map = array();
@@ -1225,9 +1200,9 @@ class MainController extends Controller
             );
 
             $year = array(
-                '2018' => 'R507A_2018',
                 '2019' => 'R404_2019',
-                '2020' => 'R508',
+                '2020' => 'R508_2020',
+                '2021' => 'R507A',
             );
 
             $map = array();
@@ -1271,9 +1246,9 @@ class MainController extends Controller
             );
 
             $year = array(
-                '2018' => 'R505A_2018',
                 '2019' => 'R405A_2019',
-                '2020' => 'R507A',
+                '2020' => 'R507A_2020',
+                '2021' => 'R505A',
             );
 
             $map = array();
@@ -1306,8 +1281,47 @@ class MainController extends Controller
             }
             //Tabel T5
 
+            //Tabel T24
+            $sheet = $spreadsheet->getSheetByName('T24');
+            $title = $sheet->getCell('D1')->getValue();
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $sheet->setCellValue('D1', $title);
+
+            $startrow = 7;
+            $row = 5;
+            foreach ($podes1 as $record) {
+                $sheet->insertNewRowBefore($startrow);
+            }
+
+            $index = 1;
+            foreach ($podes1 as $record) {
+                $sheet->setCellValue('A' . $row, $index . '.');
+                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
+                $sheet->setCellValue('E' . $row, $record->R511_2020);
+                $sheet->setCellValue('F' . $row, $record->R511B);
+                $sheet->mergeCells('B' . $row . ':D' . $row);
+                $index++;
+                $row++;
+            }
+
+            for ($i = 0; $i < 3; $i++) {
+                $sheet->removeRow($row);
+            }
+
+            $total = $sheet->getCell('A' . $row)->getValue();
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
+            $sheet->setCellValue('A' . $row, $total);
+            $sheet->unmergeCells('B' . $row . ':D' . $row);
+            $sheet->mergeCells('A' . $row . ':D' . $row);
+
+            $sheet->setCellValue('E' . $row, '=SUM(E5:E' . ($row - 1) . ')');
+            $sheet->setCellValue('F' . $row, '=SUM(F5:F' . ($row - 1) . ')');
+            $sheet->getStyle('A' . $row . ':F' . $row)
+                ->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            //Tabel T24
+
             $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-            $writer->save("result/$kec.xlsx");
+            $writer->save("result/" . $kec . "_2021.xlsx");
         }
 
         return 'done';
