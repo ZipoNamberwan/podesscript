@@ -1025,44 +1025,44 @@ class MainController extends Controller
 
             //Tabel T29
 
-            // //Tabel T17
-            // $sheet = $spreadsheet->getSheetByName('T17');
-            // $title = $sheet->getCell('D1')->getValue();
-            // $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
-            // $sheet->setCellValue('D1', $title);
+            //Tabel T17
+            $sheet = $spreadsheet->getSheetByName('T17');
+            $title = $sheet->getCell('D1')->getValue();
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $title);
+            $sheet->setCellValue('D1', $title);
 
-            // $startrow = 7;
-            // $row = 5;
-            // foreach ($podes1 as $record) {
-            //     $sheet->insertNewRowBefore($startrow);
-            // }
+            $startrow = 7;
+            $row = 5;
+            foreach ($podes2 as $record) {
+                $sheet->insertNewRowBefore($startrow);
+            }
 
-            // $index = 1;
-            // foreach ($podes1 as $record) {
-            //     $sheet->setCellValue('A' . $row, $index . '.');
-            //     $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
-            //     $sheet->setCellValue('E' . $row, $record->R1207_2019);
-            //     $sheet->setCellValue('F' . $row, $record->R604);
-            //     $sheet->mergeCells('B' . $row . ':D' . $row);
-            //     $index++;
-            //     $row++;
-            // }
+            $index = 1;
+            foreach ($podes2 as $record) {
+                $sheet->setCellValue('A' . $row, $index . '.');
+                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
+                $sheet->setCellValue('E' . $row, $record->R604_2020);
+                $sheet->setCellValue('F' . $row, $record->R710);
+                $sheet->mergeCells('B' . $row . ':D' . $row);
+                $index++;
+                $row++;
+            }
 
-            // for ($i = 0; $i < 3; $i++) {
-            //     $sheet->removeRow($row);
-            // }
+            for ($i = 0; $i < 3; $i++) {
+                $sheet->removeRow($row);
+            }
 
-            // $total = $sheet->getCell('A' . $row)->getValue();
-            // $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $total);
-            // $sheet->setCellValue('A' . $row, $total);
-            // $sheet->unmergeCells('B' . $row . ':D' . $row);
-            // $sheet->mergeCells('A' . $row . ':D' . $row);
+            $total = $sheet->getCell('A' . $row)->getValue();
+            $total = Str::replaceFirst('xxx', ucwords(Str::lower($podes2[0]->R103N)), $total);
+            $sheet->setCellValue('A' . $row, $total);
+            $sheet->unmergeCells('B' . $row . ':D' . $row);
+            $sheet->mergeCells('A' . $row . ':D' . $row);
 
-            // $sheet->setCellValue('E' . $row, '=SUM(E5:E' . ($row - 1) . ')');
-            // $sheet->setCellValue('F' . $row, '=SUM(F5:F' . ($row - 1) . ')');
-            // $sheet->getStyle('A' . $row . ':F' . $row)
-            //     ->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            // //Tabel T17
+            $sheet->setCellValue('E' . $row, '=SUM(E5:E' . ($row - 1) . ')');
+            $sheet->setCellValue('F' . $row, '=SUM(F5:F' . ($row - 1) . ')');
+            $sheet->getStyle('A' . $row . ':F' . $row)
+                ->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            //Tabel T17
 
             //Tabel T2
             $sheet = $spreadsheet->getSheetByName('T2');
