@@ -18,5 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/import', [App\Http\Controllers\MainController::class, 'import']);
-Route::get('/generate', [App\Http\Controllers\WordGeneratorController::class, 'generate']);
+// Route::get('/generate', [App\Http\Controllers\WordGeneratorController::class, 'generate']);
+Route::get('/generate', [App\Http\Controllers\InfografisController::class, 'generateImage']);
+
 
