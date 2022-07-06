@@ -333,7 +333,11 @@ class InfografisController extends Controller
                 });
             }
 
-            $p1 = explode('\n', 'Produksi Jagung di ' . $infografis[0]->R103N . ' tahun 2021 adalah 12 763,18 ton.\nDengan total luas panen mencapai 2 239 Ha.');
+            $p1 = explode('\n', 'Komoditas sayuran yang paling banyak diproduksi di Kecamatan \n' . $infografis[0]->R103N . ' tahun 2021 adalah ' .
+                $infografis[0]->horti .
+                ' dengan produksi \nsebesar ' . number_format($infografis[0]->produksi_horti, 0, '.', ' ') .
+                ' kuintal dan total luas panen mencapai ' . number_format($infografis[0]->luas_horti, 0, '.', ' ') .
+                ' Ha.');
             for ($i = 0; $i < count($p1); $i++) {
                 $offset = 1090 + ($i * 30);
                 $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
@@ -343,7 +347,9 @@ class InfografisController extends Controller
                 });
             }
 
-            $p1 = explode('\n', 'Produksi Jagung di ' . $infografis[0]->R103N . ' tahun 2021 adalah 12 763,18 ton.\nDengan total luas panen mencapai 2 239 Ha.');
+            $p1 = explode('\n', 'Jumlah Sapi Potong di Kecamatan ' . $infografis[0]->R103N .
+                ' tahun 2021 adalah \n' .
+                number_format($infografis[0]->ternak, 0, '.', ' ') . ' ekor');
             for ($i = 0; $i < count($p1); $i++) {
                 $offset = 1277 + ($i * 30);
                 $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
