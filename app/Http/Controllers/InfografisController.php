@@ -9,6 +9,8 @@ use App\Models\Podes3;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class InfografisController extends Controller
 {
@@ -466,6 +468,76 @@ class InfografisController extends Controller
 
         $img->save('template_image/4 copy.png');
         //Bab 4
+
+        return 'done';
+    }
+
+    public function generateData()
+    {
+        //data peternakan
+        // $peternakan = \PhpOffice\PhpSpreadsheet\IOFactory::load('data/peternakan.xlsx');
+        // $peternakanresult = array();
+
+        // $sheetnames = $peternakan->getSheetNames();
+        // for ($i = 0; $i < $peternakan->getSheetCount(); $i++) {
+        //     $sheet = $peternakan->getSheet($i);
+        //     $peternakanresult[$sheetnames[$i]] = $sheet->getCell('E7')->getOldCalculatedValue();
+        // }
+        // $spreadsheet = new Spreadsheet();
+        // $sheet = $spreadsheet->getActiveSheet();
+        // $i = 1;
+        // foreach ($peternakanresult as $key => $value) {
+        //     $sheet->getCell('A' . $i)
+        //         ->setValue($key);
+        //     $sheet->getCell('B' . $i)
+        //         ->setValue($value);
+        //     $i++;
+        // }
+
+        // $writer = new Xlsx($spreadsheet);
+        // $writer->save('data/peternakan result.xlsx');
+        //data peternakan
+
+        //data hortikultura
+        $hortikultura = \PhpOffice\PhpSpreadsheet\IOFactory::load('data/hortikultura.xlsx');
+        $hortikulturaresult = array();
+
+        $startrow = 9;
+        $sheetnames = $hortikultura->getSheetNames();
+
+        for ($i = 0; $i < $hortikultura->getSheetCount(); $i++) {
+            $sheet = $hortikultura->getSheet($i);
+            $value = $sheet->rangeToArray('G' . $startrow . ':G34');
+            $valueclean = array();
+            for ($j = 0; $j < count($value); $j++) {
+                $valueclean[] = (int) str_replace('-', 0, str_replace(' ', '', $value[$j][0]));
+            }
+            $hortikulturaresult[str_replace('KEC. ', '', $sheetnames[$i])] = [
+                'jenis' => $sheet->getCell('B' . array_keys($valueclean, max($valueclean))[0] + $startrow)->getValue(),
+                'produksi' => max($valueclean),
+                'luas' => str_replace(' ', '', $sheet->getCell('E' . array_keys($valueclean, max($valueclean))[0] + $startrow)->getValue())
+            ];
+        }
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $i = 1;
+        foreach ($hortikulturaresult as $key => $value) {
+            $sheet->getCell('A' . $i)
+                ->setValue($key);
+            $sheet->getCell('B' . $i)
+                ->setValue($value['jenis']);
+            $sheet->getCell('C' . $i)
+                ->setValue($value['produksi']);
+            $sheet->getCell('D' . $i)
+                ->setValue($value['luas']);
+            $i++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('data/hortikultura result.xlsx');
+
+        //data hortikultura
+
 
         return 'done';
     }
