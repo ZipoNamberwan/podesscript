@@ -27,8 +27,8 @@ class InfografisController extends Controller
             'violet' => 'dasdas'
         ];
 
-        // $kecamatan = ['10', '20', '30', '40', '50', '60', '70', '80', '90', '100', '110', '120', '130', '140', '150', '160', '170', '180', '190', '200', '210', '220', '230', '240'];
-        $kecamatan = ['10', '20', '30', '40', '50', '60', '70'];
+        $kecamatan = ['10', '20', '30', '40', '50', '60', '70', '80', '90', '100', '110', '120', '130', '140', '150', '160', '170', '180', '190', '200', '210', '220', '230', '240'];
+        // $kecamatan = ['10', '20', '30', '40', '50', '60', '70'];
 
         foreach ($kecamatan as $kec) {
 
@@ -41,17 +41,17 @@ class InfografisController extends Controller
 
             //Bab 2 PODES
             $img = Image::make('template_image/2.png');
-            $img->text('Wonomerto', 725, 724, function ($font) use ($color) {
+            $img->text(ucwords(Str::lower($podes2[0]->R103N)), 725, 724, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(22);
                 $font->color($color['black']);
             });
-            $img->text('Wonomerto', 718, 1121, function ($font) use ($color) {
+            $img->text(ucwords(Str::lower($podes2[0]->R103N)), 718, 1121, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(22);
                 $font->color($color['black']);
             });
-            $img->text('Wonomerto', 718, 1121, function ($font) use ($color) {
+            $img->text(ucwords(Str::lower($podes2[0]->R103N)), 718, 1121, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(22);
                 $font->color($color['black']);
@@ -219,7 +219,7 @@ class InfografisController extends Controller
                 $font->color($color['orange']);
                 $font->align('right');
             });
-            $p1 = explode('\n', count($podes3->where('R1001B1', 1)) . ' dari ' . count($podes3) . ' Desa di Kecamatan \n Wonomerto sudah menggunakan jalan \n jenis Aspal/Beton.');
+            $p1 = explode('\n', count($podes3->where('R1001B1', 1)) . ' dari ' . count($podes3) . ' Desa di Kecamatan \n ' . ucwords(Str::lower($podes3[0]->R103N)) . ' sudah menggunakan jalan \n jenis Aspal/Beton.');
             for ($i = 0; $i < count($p1); $i++) {
                 $offset = 1185 + ($i * 55);
                 $img->text($p1[$i], 510, $offset, function ($font) use ($color) {
@@ -229,7 +229,7 @@ class InfografisController extends Controller
                     $font->align('right');
                 });
             }
-            $p2 = explode('\n', 'Ada ' . count($podes3->whereIn('R1001C1', [1, 2])) . ' dari ' . count($podes3) . ' Desa di Kecamatan \n Wonomerto yang sudah dilalui kendaraan \n umum.');
+            $p2 = explode('\n', 'Ada ' . count($podes3->whereIn('R1001C1', [1, 2])) . ' dari ' . count($podes3) . ' Desa di Kecamatan \n ' . ucwords(Str::lower($podes3[0]->R103N)) . ' yang sudah dilalui kendaraan \n umum.');
             for ($i = 0; $i < count($p1); $i++) {
                 $offset = 1185 + ($i * 55);
                 $img->text($p2[$i], 570, $offset, function ($font) use ($color) {
