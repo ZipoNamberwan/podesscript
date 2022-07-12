@@ -6,6 +6,7 @@ use App\Models\Infografis;
 use App\Models\Podes1;
 use App\Models\Podes2;
 use App\Models\Podes3;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
@@ -28,16 +29,16 @@ class InfografisController extends Controller
         ];
 
         $kecamatan = ['10', '20', '30', '40', '50', '60', '70', '80', '90', '100', '110', '120', '130', '140', '150', '160', '170', '180', '190', '200', '210', '220', '230', '240'];
-        // $kecamatan = ['10', '20', '30', '40', '50', '60', '70'];
+        // $kecamatan = ['10', '20', '30'];
 
         foreach ($kecamatan as $kec) {
-
-            Storage::makeDirectory('public/' . $kec);
 
             $podes1 = Podes1::where(['R103' => $kec])->get();
             $podes2 = Podes2::where(['R103' => $kec])->get();
             $podes3 = Podes3::where(['R103' => $kec])->get();
             $infografis = Infografis::where(['R103' => $kec])->get();
+
+            Storage::makeDirectory('public/' . $kec . '_' . $podes1[0]->R103N);
 
             //Bab 2 PODES
             $img = Image::make('template_image/2.png');
@@ -112,11 +113,17 @@ class InfografisController extends Controller
                 $font->color($color['secondary']);
                 $font->align('center');
             });
-            $img->save('storage/' . $kec . '/2.png');
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/2.png');
             //Bab 2 PODES
 
             //Bab 7 PODES
             $img = Image::make('template_image/7.png');
+            $img->text(($infografis[0]->wisata_name != null ? 7 : 6) . '.', 354, 187, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(48);
+                $font->color($color['tertiary']);
+                $font->align('center');
+            });
             $img->text(number_format($podes1->sum('R501A1'), 0, '.', ' '), 718, 442, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(45);
@@ -147,11 +154,17 @@ class InfografisController extends Controller
                 $font->color($color['primary']);
                 $font->align('center');
             });
-            $img->save('storage/' . $kec . '/7.png');
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 7 : 6) . '.png');
             //Bab 7 PODES
 
             //Bab 8 PODES
             $img = Image::make('template_image/8.png');
+            $img->text(($infografis[0]->wisata_name != null ? 8 : 7) . '.', 410, 174, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(43);
+                $font->color($color['tertiary']);
+                $font->align('center');
+            });
             $img->text($podes3->sum('R1207BK2') + $podes3->sum('R1207CK2') + $podes3->sum('R1207DK2'), 853, 457, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(80);
@@ -187,7 +200,7 @@ class InfografisController extends Controller
                 $font->size(19);
                 $font->color($color['primary']);
             });
-            $img->save('storage/' . $kec . '/8.png');
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 8 : 7) . '.png');
             //Bab 8 PODES
 
             //Bab 9 PODES
@@ -195,6 +208,12 @@ class InfografisController extends Controller
 
             $percent1 = count($podes3->where('R1001B1', 1)) / count($podes3);
             $percent2 = count($podes3->whereIn('R1001C1', [1, 2])) / count($podes3);
+            $img->text(($infografis[0]->wisata_name != null ? 9 : 8) . '.', 309, 178, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(40);
+                $font->color($color['tertiary']);
+                $font->align('center');
+            });
             $img->text(ceil($percent1 * 100) . '%', 313, 920, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(50);
@@ -250,11 +269,16 @@ class InfografisController extends Controller
                     $draw->background($color['orange']);
                 });
             }
-            $img->save('storage/' . $kec . '/9.png');
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 9 : 8) . '.png');
             //Bab 9 PODES
 
             //Bab 6 Infografis
             $img = Image::make('template_image/6.png');
+            $img->text(($infografis[0]->wisata_name != null ? 6 : 5) . '.', 204, 150, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(38);
+                $font->color($color['tertiary']);
+            });
             $img->text(number_format(($infografis[0]->Column_6l + $infografis[0]->Column_6p), 0, '.', ' ') . ' jiwa', 350, 695, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(70);
@@ -316,7 +340,7 @@ class InfografisController extends Controller
                 $font->size(25);
                 $font->color($color['black']);
             });
-            $img->save('storage/' . $kec . '/6.png');
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 6 : 5) . '.png');
             //Bab 6 Infografis
 
             //Bab 3
@@ -359,8 +383,58 @@ class InfografisController extends Controller
                 });
             }
 
-            $img->save('storage/' . $kec . '/3.png');
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/3.png');
             //Bab 3
+
+            //Bab 4
+            if ($infografis[0]->wisata_name != null) {
+                $img = Image::make('template_image/4.png');
+                $p1 = explode('\n', 'Jumlah Wisatawan ' . ($infografis[0]->wisata_name) . '\nKecamatan ' . ($infografis[0]->R103N) . ' Tahun 2021');
+                for ($i = 0; $i < count($p1); $i++) {
+                    $offset = 750 + ($i * 40);
+                    $img->text($p1[$i], 550, $offset, function ($font) use ($color, $i) {
+                        if ($i == 0)
+                            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                        else
+                            $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
+
+                        $font->size(30 - ($i * 5));
+                        $font->color($color['primary']);
+                        $font->align('center');
+                    });
+                }
+
+                $img->text((number_format($infografis[0]->wisata_total, 0, '.', ' ')), 560, 915, function ($font) use ($color) {
+                    $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                    $font->size(90);
+                    $font->color($color['primary']);
+                    $font->align('center');
+                });
+
+                $img->text('orang', 560, 975, function ($font) use ($color) {
+                    $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                    $font->size(25);
+                    $font->color($color['primary']);
+                    $font->align('center');
+                });
+                $img->text(number_format($infografis[0]->wisata_total, 0, '.', ' '), 318, 1076, function ($font) use ($color) {
+                    $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                    $font->size(20);
+                    $font->color($color['primary']);
+                    $font->align('center');
+                });
+                $img->text($infografis[0]->wisata_name, 706, 1077, function ($font) use ($color) {
+                    $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                    $font->size(20);
+                    $font->color($color['primary']);
+                    $font->align('left');
+                });
+
+                $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/4.png');
+            }
+
+            //Bab 4
+
         }
 
         //Bab 5
@@ -417,91 +491,33 @@ class InfografisController extends Controller
         $img->save('template_image/10 copy.png');
         //Bab 10
 
-        //Bab 4
-        $img = Image::make('template_image/4.png');
-        $p1 = explode('\n', 'Jumlah Wisatawan di Agro Strawberry Jetak ds;dkas;dlka,\nKecamatan Sukapura Tahun 2020');
-        for ($i = 0; $i < count($p1); $i++) {
-            $offset = 750 + ($i * 40);
-            $img->text($p1[$i], 550, $offset, function ($font) use ($color, $i) {
-                if ($i == 0)
-                    $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                else
-                    $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
-
-                $font->size(30 - ($i * 5));
-                $font->color($color['primary']);
-                $font->align('center');
-            });
-        }
-
-        $img->text('999 999', 560, 915, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(90);
-            $font->color($color['primary']);
-            $font->align('center');
-        });
-
-        $img->text('orang', 560, 975, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(25);
-            $font->color($color['primary']);
-            $font->align('center');
-        });
-        $img->text('999 999', 318, 1076, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(20);
-            $font->color($color['primary']);
-            $font->align('center');
-        });
-        $img->text('djas;das d;kasd;l kasdasdk ', 706, 1080, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(20);
-            $font->color($color['primary']);
-            $font->align('left');
-        });
-        $img->text('999 999', 418, 1115, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(20);
-            $font->color($color['primary']);
-            $font->align('center');
-        });
-        $img->text('999 999', 377, 1152, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(20);
-            $font->color($color['primary']);
-            $font->align('right');
-        });
-
-        $img->save('template_image/4 copy.png');
-        //Bab 4
-
         return 'done';
     }
 
     public function generateData()
     {
         //data peternakan
-        // $peternakan = \PhpOffice\PhpSpreadsheet\IOFactory::load('data/peternakan.xlsx');
-        // $peternakanresult = array();
+        $peternakan = \PhpOffice\PhpSpreadsheet\IOFactory::load('data/peternakan.xlsx');
+        $peternakanresult = array();
 
-        // $sheetnames = $peternakan->getSheetNames();
-        // for ($i = 0; $i < $peternakan->getSheetCount(); $i++) {
-        //     $sheet = $peternakan->getSheet($i);
-        //     $peternakanresult[$sheetnames[$i]] = $sheet->getCell('E7')->getOldCalculatedValue();
-        // }
-        // $spreadsheet = new Spreadsheet();
-        // $sheet = $spreadsheet->getActiveSheet();
-        // $i = 1;
-        // foreach ($peternakanresult as $key => $value) {
-        //     $sheet->getCell('A' . $i)
-        //         ->setValue($key);
-        //     $sheet->getCell('B' . $i)
-        //         ->setValue($value);
-        //     $i++;
-        // }
+        $sheetnames = $peternakan->getSheetNames();
+        for ($i = 0; $i < $peternakan->getSheetCount(); $i++) {
+            $sheet = $peternakan->getSheet($i);
+            $peternakanresult[$sheetnames[$i]] = $sheet->getCell('E7')->getOldCalculatedValue();
+        }
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $i = 1;
+        foreach ($peternakanresult as $key => $value) {
+            $sheet->getCell('A' . $i)
+                ->setValue($key);
+            $sheet->getCell('B' . $i)
+                ->setValue($value);
+            $i++;
+        }
 
-        // $writer = new Xlsx($spreadsheet);
-        // $writer->save('data/peternakan result.xlsx');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('data/peternakan result.xlsx');
         //data peternakan
 
         //data hortikultura
@@ -519,9 +535,9 @@ class InfografisController extends Controller
                 $valueclean[] = (int) str_replace('-', 0, str_replace(' ', '', $value[$j][0]));
             }
             $hortikulturaresult[str_replace('KEC. ', '', $sheetnames[$i])] = [
-                'jenis' => $sheet->getCell('B' . array_keys($valueclean, max($valueclean))[0] + $startrow)->getValue(),
+                'jenis' => $sheet->getCell('B' . (array_keys($valueclean, max($valueclean))[0] + $startrow))->getValue(),
                 'produksi' => max($valueclean),
-                'luas' => str_replace(' ', '', $sheet->getCell('E' . array_keys($valueclean, max($valueclean))[0] + $startrow)->getValue())
+                'luas' => str_replace(' ', '', $sheet->getCell('E' . (array_keys($valueclean, max($valueclean))[0] + $startrow))->getValue())
             ];
         }
         $spreadsheet = new Spreadsheet();
@@ -542,7 +558,64 @@ class InfografisController extends Controller
         $writer = new Xlsx($spreadsheet);
         $writer->save('data/hortikultura result.xlsx');
 
-        //data hortikultura
+        //data pariwisata
+
+        $pariwisata = \PhpOffice\PhpSpreadsheet\IOFactory::load('data/pariwisata.xlsx');
+        $pariwisataresult = array();
+
+        $startrow = 9;
+        $sheetnames = $pariwisata->getSheetNames();
+
+        for ($i = 0; $i < $pariwisata->getSheetCount(); $i++) {
+            $sheet = $pariwisata->getSheet($i);
+
+            $row = 20;
+            $wisataarray = collect();
+            do {
+                $strpos = strpos(str_replace('Jumlah Wisatawan Domestik dan Asing di ', '', $sheet->getCell('C' . ($row - 18))->getValue()), ' di ');
+
+                $name = substr(str_replace('Jumlah Wisatawan Domestik dan Asing di ', '', $sheet->getCell('C' . ($row - 18))->getValue()), 0, $strpos);
+                $total = (int)$sheet->getCell('E' . $row)->getOldCalculatedValue();
+                $dom = (int)$sheet->getCell('C' . $row)->getOldCalculatedValue();
+                $for = (int)$sheet->getCell('D' . $row)->getOldCalculatedValue();
+
+                $row += 21;
+
+                if ($total == null) {
+                    break;
+                }
+                $wisataarray[] = [
+                    'name' => $name,
+                    'total' => $total,
+                    'dom' => $dom,
+                    'for' => $for
+                ];
+            } while (true);
+
+            $wisataarray = $wisataarray->sortBy('total');
+
+            $pariwisataresult[str_replace(' ', '', str_replace('KEC.', '', $sheetnames[$i]))] = $wisataarray->last();
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $i = 1;
+        foreach ($pariwisataresult as $key => $value) {
+            $sheet->getCell('A' . $i)
+                ->setValue($key);
+            $sheet->getCell('B' . $i)
+                ->setValue($value['name']);
+            $sheet->getCell('C' . $i)
+                ->setValue($value['total']);
+            $sheet->getCell('D' . $i)
+                ->setValue($value['dom']);
+            $sheet->getCell('E' . $i)
+                ->setValue($value['for']);
+            $i++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('data/pariwisata result.xlsx');        //data pariwisata
 
 
         return 'done';
