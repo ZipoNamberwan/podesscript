@@ -274,9 +274,9 @@ class InfografisController extends Controller
 
             //Bab 6 Infografis
             $img = Image::make('template_image/6.png');
-            $img->text(($infografis[0]->wisata_name != null ? 6 : 5) . '.', 204, 150, function ($font) use ($color) {
+            $img->text(($infografis[0]->wisata_name != null ? 6 : 5) . '.', 375, 153, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(38);
+                $font->size(45);
                 $font->color($color['tertiary']);
             });
             $img->text(number_format(($infografis[0]->Column_6l + $infografis[0]->Column_6p), 0, '.', ' ') . ' jiwa', 350, 695, function ($font) use ($color) {
@@ -435,61 +435,76 @@ class InfografisController extends Controller
 
             //Bab 4
 
+            //Bab 5
+            $img = Image::make('template_image/5.png');
+            $img->text(($infografis[0]->wisata_name != null ? 5 : 4) . '.', 368, 142, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(45);
+                $font->color($color['tertiary']);
+            });
+            $img->text($infografis[0]->total_rw, 630, 375, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(110);
+                $font->color($color['blue']);
+            });
+            $img->text($infografis[0]->total_rt, 762, 815, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(100);
+                $font->color($color['blue']);
+            });
+            $img->text($infografis[0]->total_village, 127, 874, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(130);
+                $font->color($color['primary']);
+            });
+            $img->text($infografis[0]->total_village . ' Desa, ' . $infografis[0]->total_rw . ' Rukun Warga (RW) dan ' . $infografis[0]->total_rt . ' Rukun Tetangga (RT).', 552, 1135, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(24);
+                $font->color($color['primary']);
+                $font->align('center');
+            });
+            $img->text($infografis[0]->R103N . ' memiliki, ', 719, 1078, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Regular.otf'));
+                $font->size(25);
+                $font->color($color['primary']);
+            });
+            $img->text($infografis[0]->R103N, 721, 268, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(23);
+                $font->color($color['primary']);
+            });
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 5 : 4) . '.png');
+            //Bab 5
+
+            //Bab 10
+            $img = Image::make('template_image/10.png');
+            $img->text('BAB ' . ($infografis[0]->wisata_name != null ? 10 : 9) . '. ' . ($infografis[0]->is_price_avail ? 'KEUANGAN DAERAH DAN HARGA' : 'KEUANGAN DAERAH'), 518, 123, function ($font) use ($color, $infografis) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(($infografis[0]->is_price_avail ?  32 : 40));
+                $font->color($color['tertiary']);
+                $font->align('center');
+            });
+            $img->text('Rp ' . number_format($infografis[0]->total_dd, 0, ',', ' '), 504, 1040, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(47);
+                $font->color($color['primary']);
+                $font->align('center');
+            });
+            $img->text($infografis[0]->biggest_dd, 504, 1190, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+                $font->size(28);
+                $font->color($color['primary']);
+                $font->align('center');
+            });
+            $img->text('Jumlah total dana desa dari ' . $infografis[0]->total_village . ' Desa di Kecamatan ' . $infografis[0]->R103N, 504, 925, function ($font) use ($color) {
+                $font->file(public_path('assets/font/Proxima Nova Alt Regular.otf'));
+                $font->size(24);
+                $font->color($color['primary']);
+                $font->align('center');
+            });
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 10 : 9) . '.png');
+            //Bab 10
         }
-
-        //Bab 5
-        $img = Image::make('template_image/5.png');
-        $img->text('99', 610, 390, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(98);
-            $font->color($color['blue']);
-        });
-        $img->text('999', 762, 815, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(110);
-            $font->color($color['blue']);
-        });
-        $img->text('99', 127, 874, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(130);
-            $font->color($color['primary']);
-        });
-        $img->text('14 Desa, 82 Rukun Warga (RW) dan 288 Rukun Tetangga (RT).', 552, 1135, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(24);
-            $font->color($color['primary']);
-            $font->align('center');
-        });
-        $img->text('Wonomerto', 719, 1078, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Regular.otf'));
-            $font->size(25);
-            $font->color($color['primary']);
-        });
-        $img->save('template_image/5 copy.png');
-        //Bab 5
-
-        //Bab 10
-        $img = Image::make('template_image/10.png');
-        $img->text('Rp 99 999 999 999', 504, 1040, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(47);
-            $font->color($color['primary']);
-            $font->align('center');
-        });
-        $img->text('Sokaan, Kedungcaluk, dan Opo - Opo', 504, 1190, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-            $font->size(28);
-            $font->color($color['primary']);
-            $font->align('center');
-        });
-        $img->text('Jumlah total dana desa dari 17 Desa di Kecamatan Krejengan', 504, 925, function ($font) use ($color) {
-            $font->file(public_path('assets/font/Proxima Nova Alt Regular.otf'));
-            $font->size(24);
-            $font->color($color['primary']);
-            $font->align('center');
-        });
-        $img->save('template_image/10 copy.png');
-        //Bab 10
 
         return 'done';
     }
@@ -558,6 +573,8 @@ class InfografisController extends Controller
         $writer = new Xlsx($spreadsheet);
         $writer->save('data/hortikultura result.xlsx');
 
+        //data hortikultura
+
         //data pariwisata
 
         $pariwisata = \PhpOffice\PhpSpreadsheet\IOFactory::load('data/pariwisata.xlsx');
@@ -615,7 +632,64 @@ class InfografisController extends Controller
         }
 
         $writer = new Xlsx($spreadsheet);
-        $writer->save('data/pariwisata result.xlsx');        //data pariwisata
+        $writer->save('data/pariwisata result.xlsx');
+        //data pariwisata
+
+        //data dana desa
+        $danadesa = \PhpOffice\PhpSpreadsheet\IOFactory::load('data/danadesa.xlsx');
+        $danadesaresult = array();
+
+        $startrow = 6;
+        $sheetnames = $danadesa->getSheetNames();
+
+        for ($i = 0; $i < $danadesa->getSheetCount(); $i++) {
+            $sheet = $danadesa->getSheet($i);
+            $villagenum = count(Podes1::where(['R103N' => $sheetnames[$i]])->get());
+
+            $danadesavalue = $sheet->rangeToArray('B' . $startrow . ':C' . ($startrow + $villagenum - 1));
+
+            $endrow = $startrow + $villagenum;
+            if ($sheetnames[$i] == 'Kraksaan') {
+                $endrow = $startrow + 13;
+            }
+
+            $totaldanadesa = $sheet->getCell('C' . $endrow)->getOldCalculatedValue();
+
+            $danadesavalueclean = array();
+            for ($j = 0; $j < count($danadesavalue); $j++) {
+                $danadesavalueclean[$danadesavalue[$j][0]] = (float) str_replace(',', 0, str_replace(' ', '', $danadesavalue[$j][1]));
+            }
+            arsort($danadesavalueclean);
+            $biggest = array_slice($danadesavalueclean, 0, 3);
+
+            $last  = array_slice(array_keys($biggest), -1);
+            $first = join(', ', array_slice(array_keys($biggest), 0, -1));
+            $both  = array_filter(array_merge(array($first), $last), 'strlen');
+            $biggeststring = join(' dan ', $both);
+
+            $danadesaresult[str_replace('KEC. ', '', $sheetnames[$i])] = [
+                'total' => $totaldanadesa,
+                'biggest_desa' => $biggeststring,
+            ];
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $i = 1;
+        foreach ($danadesaresult as $key => $value) {
+            $sheet->getCell('A' . $i)
+                ->setValue($key);
+            $sheet->getCell('B' . $i)
+                ->setValue($value['total']);
+            $sheet->getCell('C' . $i)
+                ->setValue($value['biggest_desa']);
+            $i++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('data/dana desa result.xlsx');
+
+        //data dana desa
 
 
         return 'done';
