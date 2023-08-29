@@ -40,8 +40,8 @@ class InfografisController extends Controller
 
             Storage::makeDirectory('public/' . $kec . '_' . $podes1[0]->R103N);
 
-            //Bab 2 PODES
-            $img = Image::make('template_image/2.png');
+            //Bab 4 PODES BARU
+            $img = Image::make('template_image/4.png');
             $img->text(ucwords(Str::lower($podes2[0]->R103N)), 725, 724, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(22);
@@ -113,58 +113,53 @@ class InfografisController extends Controller
                 $font->color($color['secondary']);
                 $font->align('center');
             });
-            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/2.png');
-            //Bab 2 PODES
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/4.png');
+            //Bab 4 PODES BARU
 
             //Bab 7 PODES
+            // $img = Image::make('template_image/7.png');
+            // $img->text(($infografis[0]->wisata_name != null ? 7 : 6) . '.', 354, 187, function ($font) use ($color) {
+            //     $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //     $font->size(48);
+            //     $font->color($color['tertiary']);
+            //     $font->align('center');
+            // });
+            // $img->text(number_format($podes1->sum('R501A1'), 0, '.', ' '), 718, 442, function ($font) use ($color) {
+            //     $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //     $font->size(45);
+            //     $font->color($color['tertiary']);
+            //     $font->align('center');
+            // });
+            // $img->text(count($podes1->where('R503B', 4)), 310, 1043, function ($font) use ($color) {
+            //     $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //     $font->size(24);
+            //     $font->color($color['primary']);
+            //     $font->align('center');
+            // });
+            // $img->text(count($podes1), 405, 1043, function ($font) use ($color) {
+            //     $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //     $font->size(24);
+            //     $font->color($color['primary']);
+            //     $font->align('center');
+            // });
+            // $img->text(count($podes1->whereIn('R507A', [3, 4])), 687, 1043, function ($font) use ($color) {
+            //     $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //     $font->size(24);
+            //     $font->color($color['primary']);
+            //     $font->align('center');
+            // });
+            // $img->text(count($podes1), 785, 1043, function ($font) use ($color) {
+            //     $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //     $font->size(24);
+            //     $font->color($color['primary']);
+            //     $font->align('center');
+            // });
+            // $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 7 : 6) . '.png');
+            //Bab 7 PODES
+
+            //Bab 7 PODES BARU
             $img = Image::make('template_image/7.png');
-            $img->text(($infografis[0]->wisata_name != null ? 7 : 6) . '.', 354, 187, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(48);
-                $font->color($color['tertiary']);
-                $font->align('center');
-            });
-            $img->text(number_format($podes1->sum('R501A1'), 0, '.', ' '), 718, 442, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(45);
-                $font->color($color['tertiary']);
-                $font->align('center');
-            });
-            $img->text(count($podes1->where('R503B', 4)), 310, 1043, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(24);
-                $font->color($color['primary']);
-                $font->align('center');
-            });
-            $img->text(count($podes1), 405, 1043, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(24);
-                $font->color($color['primary']);
-                $font->align('center');
-            });
-            $img->text(count($podes1->whereIn('R507A', [3, 4])), 687, 1043, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(24);
-                $font->color($color['primary']);
-                $font->align('center');
-            });
-            $img->text(count($podes1), 785, 1043, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(24);
-                $font->color($color['primary']);
-                $font->align('center');
-            });
-            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 7 : 6) . '.png');
-            //Bab 7 PODES
 
-            //Bab 8 PODES
-            $img = Image::make('template_image/8.png');
-            $img->text(($infografis[0]->wisata_name != null ? 8 : 7) . '.', 410, 174, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(43);
-                $font->color($color['tertiary']);
-                $font->align('center');
-            });
             $img->text($podes3->sum('R1207BK2') + $podes3->sum('R1207CK2') + $podes3->sum('R1207DK2'), 853, 457, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(80);
@@ -200,20 +195,15 @@ class InfografisController extends Controller
                 $font->size(19);
                 $font->color($color['primary']);
             });
-            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 8 : 7) . '.png');
-            //Bab 8 PODES
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/7.png');
+            //Bab 7 PODES BARU
 
-            //Bab 9 PODES
-            $img = Image::make('template_image/9.png');
+            //Bab 6 PODES BARU
+            $img = Image::make('template_image/6.png');
 
             $percent1 = count($podes3->where('R1001B1', 1)) / count($podes3);
             $percent2 = count($podes3->whereIn('R1001C1', [1, 2])) / count($podes3);
-            $img->text(($infografis[0]->wisata_name != null ? 9 : 8) . '.', 309, 178, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(40);
-                $font->color($color['tertiary']);
-                $font->align('center');
-            });
+
             $img->text(ceil($percent1 * 100) . '%', 313, 920, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(50);
@@ -269,16 +259,11 @@ class InfografisController extends Controller
                     $draw->background($color['orange']);
                 });
             }
-            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 9 : 8) . '.png');
-            //Bab 9 PODES
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/6.png');
+            //Bab 6 PODES BARU
 
-            //Bab 6 Infografis
-            $img = Image::make('template_image/6.png');
-            $img->text(($infografis[0]->wisata_name != null ? 6 : 5) . '.', 375, 153, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(45);
-                $font->color($color['tertiary']);
-            });
+            //Bab 3 Infografis BARU
+            $img = Image::make('template_image/3.png');
             $img->text(number_format(($infografis[0]->Column_6l + $infografis[0]->Column_6p), 0, '.', ' ') . ' jiwa', 350, 695, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(70);
@@ -340,108 +325,104 @@ class InfografisController extends Controller
                 $font->size(25);
                 $font->color($color['black']);
             });
-            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 6 : 5) . '.png');
-            //Bab 6 Infografis
-
-            //Bab 3
-            $img = Image::make('template_image/3.png');
-            $p1 = explode('\n', 'Produksi Padi di ' . $infografis[0]->R103N . ' tahun 2021 adalah ' .
-                number_format($infografis[0]->Column_3padi_produksi, 0, '.', ' ')  . ' ton.\nDengan total luas panen mencapai ' .
-                number_format($infografis[0]->Column_3padi_luas, 0, '.', ' ') . ' Ha.');
-            for ($i = 0; $i < count($p1); $i++) {
-                $offset = 905 + ($i * 30);
-                $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
-                    $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
-                    $font->size(20);
-                    $font->color($color['primary']);
-                });
-            }
-
-            $p1 = explode('\n', 'Komoditas sayuran yang paling banyak diproduksi di Kecamatan \n' . $infografis[0]->R103N . ' tahun 2021 adalah ' .
-                $infografis[0]->horti .
-                ' dengan produksi \nsebesar ' . number_format($infografis[0]->produksi_horti, 0, '.', ' ') .
-                ' kuintal dan total luas panen mencapai ' . number_format($infografis[0]->luas_horti, 0, '.', ' ') .
-                ' Ha.');
-            for ($i = 0; $i < count($p1); $i++) {
-                $offset = 1090 + ($i * 30);
-                $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
-                    $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
-                    $font->size(20);
-                    $font->color($color['primary']);
-                });
-            }
-
-            $p1 = explode('\n', 'Jumlah Sapi Potong di Kecamatan ' . $infografis[0]->R103N .
-                ' tahun 2021 adalah \n' .
-                number_format($infografis[0]->ternak, 0, '.', ' ') . ' ekor');
-            for ($i = 0; $i < count($p1); $i++) {
-                $offset = 1277 + ($i * 30);
-                $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
-                    $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
-                    $font->size(20);
-                    $font->color($color['primary']);
-                });
-            }
-
             $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/3.png');
+            //Bab 6 Infografis BARU
+
+            //Bab 3
+            // $img = Image::make('template_image/3.png');
+            // $p1 = explode('\n', 'Produksi Padi di ' . $infografis[0]->R103N . ' tahun 2021 adalah ' .
+            //     number_format($infografis[0]->Column_3padi_produksi, 0, '.', ' ')  . ' ton.\nDengan total luas panen mencapai ' .
+            //     number_format($infografis[0]->Column_3padi_luas, 0, '.', ' ') . ' Ha.');
+            // for ($i = 0; $i < count($p1); $i++) {
+            //     $offset = 905 + ($i * 30);
+            //     $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
+            //         $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
+            //         $font->size(20);
+            //         $font->color($color['primary']);
+            //     });
+            // }
+
+            // $p1 = explode('\n', 'Komoditas sayuran yang paling banyak diproduksi di Kecamatan \n' . $infografis[0]->R103N . ' tahun 2021 adalah ' .
+            //     $infografis[0]->horti .
+            //     ' dengan produksi \nsebesar ' . number_format($infografis[0]->produksi_horti, 0, '.', ' ') .
+            //     ' kuintal dan total luas panen mencapai ' . number_format($infografis[0]->luas_horti, 0, '.', ' ') .
+            //     ' Ha.');
+            // for ($i = 0; $i < count($p1); $i++) {
+            //     $offset = 1090 + ($i * 30);
+            //     $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
+            //         $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
+            //         $font->size(20);
+            //         $font->color($color['primary']);
+            //     });
+            // }
+
+            // $p1 = explode('\n', 'Jumlah Sapi Potong di Kecamatan ' . $infografis[0]->R103N .
+            //     ' tahun 2021 adalah \n' .
+            //     number_format($infografis[0]->ternak, 0, '.', ' ') . ' ekor');
+            // for ($i = 0; $i < count($p1); $i++) {
+            //     $offset = 1277 + ($i * 30);
+            //     $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
+            //         $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
+            //         $font->size(20);
+            //         $font->color($color['primary']);
+            //     });
+            // }
+
+            // $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/3.png');
             //Bab 3
 
             //Bab 4
-            if ($infografis[0]->wisata_name != null) {
-                $img = Image::make('template_image/4.png');
-                $p1 = explode('\n', 'Jumlah Wisatawan ' . ($infografis[0]->wisata_name) . '\nKecamatan ' . ($infografis[0]->R103N) . ' Tahun 2021');
-                for ($i = 0; $i < count($p1); $i++) {
-                    $offset = 750 + ($i * 40);
-                    $img->text($p1[$i], 550, $offset, function ($font) use ($color, $i) {
-                        if ($i == 0)
-                            $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                        else
-                            $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
+            // if ($infografis[0]->wisata_name != null) {
+            //     $img = Image::make('template_image/4.png');
+            //     $p1 = explode('\n', 'Jumlah Wisatawan ' . ($infografis[0]->wisata_name) . '\nKecamatan ' . ($infografis[0]->R103N) . ' Tahun 2021');
+            //     for ($i = 0; $i < count($p1); $i++) {
+            //         $offset = 750 + ($i * 40);
+            //         $img->text($p1[$i], 550, $offset, function ($font) use ($color, $i) {
+            //             if ($i == 0)
+            //                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //             else
+            //                 $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
 
-                        $font->size(30 - ($i * 5));
-                        $font->color($color['primary']);
-                        $font->align('center');
-                    });
-                }
+            //             $font->size(30 - ($i * 5));
+            //             $font->color($color['primary']);
+            //             $font->align('center');
+            //         });
+            //     }
 
-                $img->text((number_format($infografis[0]->wisata_total, 0, '.', ' ')), 560, 915, function ($font) use ($color) {
-                    $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                    $font->size(90);
-                    $font->color($color['primary']);
-                    $font->align('center');
-                });
+            //     $img->text((number_format($infografis[0]->wisata_total, 0, '.', ' ')), 560, 915, function ($font) use ($color) {
+            //         $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //         $font->size(90);
+            //         $font->color($color['primary']);
+            //         $font->align('center');
+            //     });
 
-                $img->text('orang', 560, 975, function ($font) use ($color) {
-                    $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                    $font->size(25);
-                    $font->color($color['primary']);
-                    $font->align('center');
-                });
-                $img->text(number_format($infografis[0]->wisata_total, 0, '.', ' '), 318, 1076, function ($font) use ($color) {
-                    $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                    $font->size(20);
-                    $font->color($color['primary']);
-                    $font->align('center');
-                });
-                $img->text($infografis[0]->wisata_name, 706, 1077, function ($font) use ($color) {
-                    $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                    $font->size(20);
-                    $font->color($color['primary']);
-                    $font->align('left');
-                });
+            //     $img->text('orang', 560, 975, function ($font) use ($color) {
+            //         $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //         $font->size(25);
+            //         $font->color($color['primary']);
+            //         $font->align('center');
+            //     });
+            //     $img->text(number_format($infografis[0]->wisata_total, 0, '.', ' '), 318, 1076, function ($font) use ($color) {
+            //         $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //         $font->size(20);
+            //         $font->color($color['primary']);
+            //         $font->align('center');
+            //     });
+            //     $img->text($infografis[0]->wisata_name, 706, 1077, function ($font) use ($color) {
+            //         $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //         $font->size(20);
+            //         $font->color($color['primary']);
+            //         $font->align('left');
+            //     });
 
-                $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/4.png');
-            }
+            //     $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/4.png');
+            // }
 
             //Bab 4
 
-            //Bab 5
-            $img = Image::make('template_image/5.png');
-            $img->text(($infografis[0]->wisata_name != null ? 5 : 4) . '.', 368, 142, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(45);
-                $font->color($color['tertiary']);
-            });
+            //Bab 2 Infografis BARU
+            $img = Image::make('template_image/2.png');
+
             $img->text($infografis[0]->total_rw, 630, 375, function ($font) use ($color) {
                 $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
                 $font->size(110);
@@ -473,36 +454,36 @@ class InfografisController extends Controller
                 $font->size(23);
                 $font->color($color['primary']);
             });
-            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 5 : 4) . '.png');
-            //Bab 5
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/2.png');
+            //Bab 2 Infografis BARU
 
             //Bab 10
-            $img = Image::make('template_image/10.png');
-            $img->text('BAB ' . ($infografis[0]->wisata_name != null ? 10 : 9) . '. ' . ($infografis[0]->is_price_avail ? 'KEUANGAN DAERAH DAN HARGA' : 'KEUANGAN DAERAH'), 518, 123, function ($font) use ($color, $infografis) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(($infografis[0]->is_price_avail ?  32 : 40));
-                $font->color($color['tertiary']);
-                $font->align('center');
-            });
-            $img->text('Rp ' . number_format($infografis[0]->total_dd, 0, ',', ' '), 504, 1040, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(47);
-                $font->color($color['primary']);
-                $font->align('center');
-            });
-            $img->text($infografis[0]->biggest_dd, 504, 1190, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
-                $font->size(28);
-                $font->color($color['primary']);
-                $font->align('center');
-            });
-            $img->text('Jumlah total dana desa dari ' . $infografis[0]->total_village . ' Desa di Kecamatan ' . $infografis[0]->R103N, 504, 925, function ($font) use ($color) {
-                $font->file(public_path('assets/font/Proxima Nova Alt Regular.otf'));
-                $font->size(24);
-                $font->color($color['primary']);
-                $font->align('center');
-            });
-            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 10 : 9) . '.png');
+            // $img = Image::make('template_image/10.png');
+            // $img->text('BAB ' . ($infografis[0]->wisata_name != null ? 10 : 9) . '. ' . ($infografis[0]->is_price_avail ? 'KEUANGAN DAERAH DAN HARGA' : 'KEUANGAN DAERAH'), 518, 123, function ($font) use ($color, $infografis) {
+            //     $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //     $font->size(($infografis[0]->is_price_avail ?  32 : 40));
+            //     $font->color($color['tertiary']);
+            //     $font->align('center');
+            // });
+            // $img->text('Rp ' . number_format($infografis[0]->total_dd, 0, ',', ' '), 504, 1040, function ($font) use ($color) {
+            //     $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //     $font->size(47);
+            //     $font->color($color['primary']);
+            //     $font->align('center');
+            // });
+            // $img->text($infografis[0]->biggest_dd, 504, 1190, function ($font) use ($color) {
+            //     $font->file(public_path('assets/font/Proxima Nova Alt Bold.otf'));
+            //     $font->size(28);
+            //     $font->color($color['primary']);
+            //     $font->align('center');
+            // });
+            // $img->text('Jumlah total dana desa dari ' . $infografis[0]->total_village . ' Desa di Kecamatan ' . $infografis[0]->R103N, 504, 925, function ($font) use ($color) {
+            //     $font->file(public_path('assets/font/Proxima Nova Alt Regular.otf'));
+            //     $font->size(24);
+            //     $font->color($color['primary']);
+            //     $font->align('center');
+            // });
+            // $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/' . ($infografis[0]->wisata_name != null ? 10 : 9) . '.png');
             //Bab 10
         }
 
