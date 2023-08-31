@@ -328,8 +328,8 @@ class InfografisController extends Controller
             $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/3.png');
             //Bab 6 Infografis BARU
 
-            //Bab 3
-            // $img = Image::make('template_image/3.png');
+            //Bab 5 BARU
+            // $img = Image::make('template_image/5.png');
             // $p1 = explode('\n', 'Produksi Padi di ' . $infografis[0]->R103N . ' tahun 2021 adalah ' .
             //     number_format($infografis[0]->Column_3padi_produksi, 0, '.', ' ')  . ' ton.\nDengan total luas panen mencapai ' .
             //     number_format($infografis[0]->Column_3padi_luas, 0, '.', ' ') . ' Ha.');
@@ -368,8 +368,8 @@ class InfografisController extends Controller
             //     });
             // }
 
-            // $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/3.png');
-            //Bab 3
+            // $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/5.png');
+            //Bab 5 BARU
 
             //Bab 4
             // if ($infografis[0]->wisata_name != null) {
