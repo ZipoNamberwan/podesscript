@@ -21,3 +21,4 @@ Route::get('/import', [App\Http\Controllers\MainController::class, 'import']);
 // Route::get('/generate', [App\Http\Controllers\WordGeneratorController::class, 'generate']);
 Route::get('/generate', [App\Http\Controllers\InfografisController::class, 'generateImage']);
 Route::get('/generate-data', [App\Http\Controllers\InfografisController::class, 'generateData']);
+Route::get('/simdasi', [App\Http\Controllers\SimdasiController::class, 'transform']);

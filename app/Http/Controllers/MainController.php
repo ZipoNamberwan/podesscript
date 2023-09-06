@@ -26,6 +26,62 @@ class MainController extends Controller
 
             $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('template 2023.xlsx');
 
+            //Tabel 1.1.2
+            $sheet = $spreadsheet->getSheetByName('1.1.2');
+            $title = $sheet->getCell('D1')->getValue();
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes3[0]->R103N)), $title);
+            $sheet->setCellValue('D1', $title);
+
+            $startrow = 7;
+            $row = 5;
+            foreach ($podes3 as $record) {
+                $sheet->insertNewRowBefore($startrow);
+            }
+
+            $index = 1;
+            foreach ($podes3 as $record) {
+                $sheet->setCellValue('A' . $row, $index . '.');
+                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
+                $sheet->setCellValue('E' . $row, $record->R1002AK5);
+                $sheet->setCellValue('F' . $row, $record->R1002BK5);
+                $sheet->mergeCells('B' . $row . ':D' . $row);
+                $index++;
+                $row++;
+            }
+
+            for ($i = 0; $i < 3; $i++) {
+                $sheet->removeRow($row);
+            }
+            //Tabel 1.1.2
+
+            //Tabel 1.1.3
+            $sheet = $spreadsheet->getSheetByName('1.1.3');
+            $title = $sheet->getCell('D1')->getValue();
+            $title = Str::replaceFirst('xxx', ucwords(Str::lower($podes1[0]->R103N)), $title);
+            $sheet->setCellValue('D1', $title);
+
+            $startrow = 7;
+            $row = 5;
+            foreach ($podes1 as $record) {
+                $sheet->insertNewRowBefore($startrow);
+            }
+
+            $index = 1;
+            foreach ($podes1 as $record) {
+                $sheet->setCellValue('A' . $row, $index . '.');
+                $sheet->setCellValue('B' . $row, ucwords(Str::lower($record->R104N)));
+                $sheet->setCellValue('E' . $row, $record->R308A == "1" ? 'v' : '');
+                $sheet->setCellValue('F' . $row, $record->R308A == "2" ? 'v' : '');
+                $sheet->mergeCells('B' . $row . ':D' . $row);
+                $index++;
+                $row++;
+            }
+
+            for ($i = 0; $i < 3; $i++) {
+                $sheet->removeRow($row);
+            }
+            //Tabel 1.1.3
+
             //Tabel 4.1.1
             $sheet = $spreadsheet->getSheetByName('4.1.1');
             $title = $sheet->getCell('D1')->getValue();
