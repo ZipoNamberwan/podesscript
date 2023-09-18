@@ -329,8 +329,72 @@ class InfografisController extends Controller
             //Bab 6 Infografis BARU
 
             //Bab 5 BARU
-            // $img = Image::make('template_image/5.png');
-            // $p1 = explode('\n', 'Produksi Padi di ' . $infografis[0]->R103N . ' tahun 2021 adalah ' .
+            $img = Image::make('template_image/5.png');
+
+            // generate data sayuran dan buah-buahan
+            $tablesource = array(
+                '5.4.3', '5.4.4'
+            );
+            $colVegetables = array(
+                'Bawang Daun' => 'B',
+                'Bawang Merah' => 'D',
+                'Bawang Putih' => 'F',
+                'Cabai Rawit' => 'L',
+                'Kentang' => 'T',
+                'Kubis' => 'X',
+                'Melon' => 'AB',
+                'Petsai/Sawi' => 'AF',
+                'Semangka' => 'AH',
+                'Stroberi' => 'AJ',
+                'Tomat' => 'AN',
+                'Cabai Besar' => 'AR',
+            );
+
+            $resultvegetables = array();
+            foreach ($tablesource as $tablename) {
+                $source = \PhpOffice\PhpSpreadsheet\IOFactory::load('data/simdasi/source/' . $tablename . '.xlsx');
+                $sheetSource = $source->getSheet(0);
+
+                $sourceRow = 0;
+                for ($i = 9; $i < 33; $i++) {
+                    if ($sheetSource->getCell('A' . $i)->getValue() == ucwords(Str::lower($podes2[0]->R103N))) {
+                        $sourceRow = $i;
+                        break;
+                    }
+                }
+
+                foreach ($colVegetables as $key => $colname) {
+                    $colname++;
+                    $value = floatval(str_replace(",", ".", str_replace(" ", "", $sheetSource->getCell($colname . $sourceRow)->getValue())));
+                    if (!key_exists($tablename, $resultvegetables)) {
+                        $resultvegetables[$tablename] = array(
+                            'highest_vegetable' => '',
+                            'highest_value' => 0,
+                        );
+                    }
+                    if ($value > $resultvegetables[$tablename]['highest_value']) {
+                        $resultvegetables[$tablename]['highest_value'] = $value;
+                        $resultvegetables[$tablename]['highest_vegetable'] = $key;
+                    }
+                }
+            }
+
+            // generate data ternak
+            $source = \PhpOffice\PhpSpreadsheet\IOFactory::load('data/simdasi/source/5.4.13.xlsx');
+            $sheetSource = $source->getSheet(0);
+
+            $livestockcow = 0;
+            $sourceRow = 0;
+            for ($i = 9; $i < 33; $i++) {
+                if ($sheetSource->getCell('A' . $i)->getValue() == ucwords(Str::lower($podes2[0]->R103N))) {
+                    $sourceRow = $i;
+                    break;
+                }
+            }
+
+            $livestockcow = intval($sheetSource->getCell('D' . $sourceRow)->getValue()) + (intval($sheetSource->getCell('E' . $sourceRow)->getValue()));
+
+            // $p1 = explode('\n', 'Produksi Padi di ' . $infografis[0]->R103N . ' tahun 2022 adalah ' .
             //     number_format($infografis[0]->Column_3padi_produksi, 0, '.', ' ')  . ' ton.\nDengan total luas panen mencapai ' .
             //     number_format($infografis[0]->Column_3padi_luas, 0, '.', ' ') . ' Ha.');
             // for ($i = 0; $i < count($p1); $i++) {
@@ -342,33 +406,33 @@ class InfografisController extends Controller
             //     });
             // }
 
-            // $p1 = explode('\n', 'Komoditas sayuran yang paling banyak diproduksi di Kecamatan \n' . $infografis[0]->R103N . ' tahun 2021 adalah ' .
-            //     $infografis[0]->horti .
-            //     ' dengan produksi \nsebesar ' . number_format($infografis[0]->produksi_horti, 0, '.', ' ') .
-            //     ' kuintal dan total luas panen mencapai ' . number_format($infografis[0]->luas_horti, 0, '.', ' ') .
-            //     ' Ha.');
-            // for ($i = 0; $i < count($p1); $i++) {
-            //     $offset = 1090 + ($i * 30);
-            //     $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
-            //         $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
-            //         $font->size(20);
-            //         $font->color($color['primary']);
-            //     });
-            // }
+            $p1 = explode('\n', 'Tanaman Sayuran yang paling banyak diproduksi di Kecamatan \n' . $infografis[0]->R103N . ' tahun 2022 adalah ' .
+                $resultvegetables['5.4.4']['highest_vegetable'] .
+                ' dengan produksi \nsebesar ' . number_format($resultvegetables['5.4.4']['highest_value'], 0, '.', ' ') .
+                ' kuintal dan total luas panen mencapai ' . number_format($resultvegetables['5.4.3']['highest_value'], 0, '.', ' ') .
+                ' Ha.');
+            for ($i = 0; $i < count($p1); $i++) {
+                $offset = 1090 + ($i * 30);
+                $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
+                    $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
+                    $font->size(20);
+                    $font->color($color['primary']);
+                });
+            }
 
-            // $p1 = explode('\n', 'Jumlah Sapi Potong di Kecamatan ' . $infografis[0]->R103N .
-            //     ' tahun 2021 adalah \n' .
-            //     number_format($infografis[0]->ternak, 0, '.', ' ') . ' ekor');
-            // for ($i = 0; $i < count($p1); $i++) {
-            //     $offset = 1277 + ($i * 30);
-            //     $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
-            //         $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
-            //         $font->size(20);
-            //         $font->color($color['primary']);
-            //     });
-            // }
+            $p1 = explode('\n', 'Jumlah Sapi Potong di Kecamatan ' . $infografis[0]->R103N .
+                ' tahun 2022 adalah \n' .
+                number_format($livestockcow, 0, '.', ' ') . ' ekor');
+            for ($i = 0; $i < count($p1); $i++) {
+                $offset = 1277 + ($i * 30);
+                $img->text($p1[$i], 304, $offset, function ($font) use ($color) {
+                    $font->file(public_path('assets/font/Proxima Nova Regular.otf'));
+                    $font->size(20);
+                    $font->color($color['primary']);
+                });
+            }
 
-            // $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/5.png');
+            $img->save('storage/' . $kec . '_' . $podes1[0]->R103N . '/5.png');
             //Bab 5 BARU
 
             //Bab 4
